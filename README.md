@@ -34,8 +34,8 @@ Where:
 - `action` is either `+` or `-` to indicate whether the permission is granted or revoked. If nothip is specified, the permission is granted;
 - `permission` is a string rapresenting the permission to be assigned;
 - `target` is a string rapresenting the target resrouce of the permission, which is made up of:
-	- `app` is the name of the app, or a general identifier for the type of resource;
-	- `resource` is a unique identifier the resource.
+   - `app` is the name of the app, or a general identifier for the type of resource;
+   - `resource` is a unique identifier the resource.
 
 ### Permission string examples
 
@@ -64,25 +64,25 @@ access@projects
 The permission tree follows this structure:
 ```json
 {
-	"projects": {
-		"": {
-			"access": "+",
-		},
-		"projectid": {
-			"access": "-"
-		},
-		"projectid:prototype": {
-			"access": "+"
-		}
-	},
-	"users": {
-		"": {
-			"access": "+"
-		},
-		"userid1": {
-			"*": "-"
-		}
-	}
+   "projects": {
+      "": {
+         "access": "+",
+      },
+      "projectid": {
+         "access": "-"
+      },
+      "projectid:prototype": {
+         "access": "+"
+      }
+   },
+   "users": {
+      "": {
+         "access": "+"
+      },
+      "userid1": {
+         "*": "-"
+      }
+   }
 }
 ```
 
@@ -163,18 +163,18 @@ The various permissions blocks are passed from the least to the most important, 
 const { parsePermissions } = require('@xevolab/permissions');
 
 let permissionsTree = parsePermissions([
-	[
-		"access@projects",
-		"-access@projects:projectid",
-		"-*@users"
-	],
-	[
-		"+access@projects:projectid:prototype",
-		"-access@projects:projectid:prototype",
-	],
-	[
-		"+*@users"
-	]
+   [
+      "access@projects",
+      "-access@projects:projectid",
+      "-*@users"
+   ],
+   [
+      "+access@projects:projectid:prototype",
+      "-access@projects:projectid:prototype",
+   ],
+   [
+      "+*@users"
+   ]
 ]);
 /*
 {
@@ -283,18 +283,18 @@ authorize(permissionTree, 'access@projects:projectid', false);
 ### Using `authorize` in Express
 
 ```javascript
-const { authorize } = require('@xevolab/permissions');
+const { parsePermissions, authorize } = require('@xevolab/permissions');
 
 app.use((req, res, next) => {
   if (req.user) {
-	 req.user.permissions = parsePermissions([
-		req.user.permissions,
-		req.user.groups.map(group => group.permissions)
-	 ]);
+    req.user.permissions = parsePermissions([
+      req.user.permissions,
+      req.user.groups.map(group => group.permissions)
+    ]);
 
-	 res.user.authorize = (requested, simpleMode) => authorize(req.user.permissions, requested, simpleMode);
-	 // Or, using bind
-	 res.user.authorize = authorize.bind(null, req.user.permissions);
+    res.user.authorize = (requested, simpleMode) => authorize(req.user.permissions, requested, simpleMode);
+    // Or, using bind
+    res.user.authorize = authorize.bind(null, req.user.permissions);
 
   }
   next();
@@ -302,9 +302,9 @@ app.use((req, res, next) => {
 
 app.get('/projects/:projectid/prototype/:prototypeid', (req, res, next) => {
   if (req.user && req.user.authorize(`access@projects:${req.params.projectid}:prototype:${req.params.prototypeid}`)) {
-	 // Do something
+    // Do something
   } else {
-	 // Do something else
+    // Do something else
   }
 });
 ```
