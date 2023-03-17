@@ -2,7 +2,7 @@
  * Author    : Francesco
  * Created at: 2023-03-16 20:30
  * Edited by : Francesco
- * Edited at : 2023-03-17 13:34
+ * Edited at : 2023-03-17 14:01
  * 
  * Copyright (c) 2023 Xevolab S.R.L.
  */
@@ -10,9 +10,10 @@
 const permRegex = /^(\+|-)?(([A-Za-z0-9]+)|(\*))+@[a-zA-Z0-9]+(((:[a-zA-Z0-9-_]*)*(:[a-zA-Z0-9-_]+)$)|$)/;
 
 /**
- * The parsePermissions function takes the permission from the database,
- * coming from the user permissions table adn the group permissions table
- * to then join them together.
+ * The parsePermissions function takes the permission blocks, which are
+ * lists of permissions strings, and converts them into a tree-like
+ * structure that can be used to check whether a user has a certain
+ * permission.
  * @param  {[[string]]} permBlocks  A list of lists of permissions strings
  *                                  granted to the user sorted from the 
  *                                  least important to the most important.
@@ -160,10 +161,12 @@ const validatePermission = (perm) => {
  * he/she has the permissions defined in the `granted` object.
  * The `requested` should be the most accurate representation of the action
  * that is being performed.
- * @param  {string} requested  The permissions required to perform
- *                             the action
- * @param  {object} granted    The permission object that rapresents
- *                             what the user is allowed to do
+ * @param  {object} granted      The permission object that rapresents
+ *                               what the user is allowed to do
+ * @param  {string} requested    The permissions required to perform
+ *                               the action
+ * @param  {boolean} simpleMode  Whether to return a simple boolean or
+ * 									   a more detailed object
  * @return {object}
  */
 const authorize = (granted, requested, simpleMode = true) => {
