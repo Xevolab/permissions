@@ -6,6 +6,8 @@ name: "Node.js Package on NPM"
 on:
   release:
     types: [created]
+  workflow_dispatch:
+    branches: [ main ]
 
 jobs:
   build:
@@ -16,7 +18,7 @@ jobs:
         with:
           node-version: 18
       - run: npm ci
-      - run: npm build
+      - run: npm run build
 
   publish-npm:
     needs: build
@@ -28,6 +30,7 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - run: npm publish:npm
+      - run: npm run build
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
