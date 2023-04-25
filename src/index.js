@@ -2,8 +2,8 @@
  * Author    : Francesco
  * Created at: 2023-03-16 20:30
  * Edited by : Francesco
- * Edited at : 2023-04-25 15:54
- * 
+ * Edited at : 2023-04-25 16:26
+ *
  * Copyright (c) 2023 Xevolab S.R.L.
  */
 
@@ -15,12 +15,12 @@ const permRegex = /^(\+|-)?(([A-Za-z0-9]+)|(\*))+@[a-zA-Z0-9]+(((:[a-zA-Z0-9-_]*
  * structure that can be used to check whether a user has a certain
  * permission.
  * @param  {[[string]]} permBlocks  A list of lists of permissions strings
- *                                  granted to the user sorted from the 
+ *                                  granted to the user sorted from the
  *                                  least important to the most important.
  * @return {object}                 An object containing the permissions
  *                                  in a tree-like structure.
  */
-const parsePermissions = (permBlocks = []) => {
+export const parsePermissions = (permBlocks = []) => {
 
 	let apps = {};
 
@@ -35,7 +35,7 @@ const parsePermissions = (permBlocks = []) => {
 
 			/*
 			  Permissions follow the structure:
-	
+
 								[action]<permission>@<target>
 			  action     = +|-
 			  permission = the permission to be assigned
@@ -128,7 +128,7 @@ const parsePermissions = (permBlocks = []) => {
  * @param  {object}    p          tree-like structure
  * @return {[string]}             permissions as array of strings
  */
-const stringifyPermissions = (p) => {
+export const stringifyPermissions = (p) => {
 	let permissionStrings = [];
 
 	// For each app
@@ -147,11 +147,11 @@ const stringifyPermissions = (p) => {
 
 /**
  * validatePermission checks that a passed permission string is valid when
- * checked against the 
+ * checked against the
  * @param   {string}  perm  The permission in a string form
  * @return  {boolean}       Whether the permission string is valid
  */
-const validatePermission = (perm) => {
+export const validatePermission = (perm) => {
 	return permRegex.test(perm);
 }
 
@@ -169,7 +169,7 @@ const validatePermission = (perm) => {
  * 									   a more detailed object
  * @return {object}
  */
-const authorize = (granted, requested, simpleMode = true) => {
+export const authorize = (granted, requested, simpleMode = true) => {
 
 	function result(e) {
 		// console.log("Auth result debug: ", e);
@@ -261,6 +261,3 @@ const authorize = (granted, requested, simpleMode = true) => {
 	return result({ authorized: false, message: `No authorization was found for this resource` })
 
 }
-
-module.exports = { parsePermissions, stringifyPermissions, validatePermission, authorize };
-export default { parsePermissions, stringifyPermissions, validatePermission, authorize };
