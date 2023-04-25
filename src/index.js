@@ -2,7 +2,7 @@
  * Author    : Francesco
  * Created at: 2023-03-16 20:30
  * Edited by : Francesco
- * Edited at : 2023-03-17 14:01
+ * Edited at : 2023-04-25 15:54
  * 
  * Copyright (c) 2023 Xevolab S.R.L.
  */
@@ -262,4 +262,5 @@ const authorize = (granted, requested, simpleMode = true) => {
 
 }
 
-module.exports = { parsePermissions, stringifyPermissions, validatePermission, authorize }
+module.exports = { parsePermissions, stringifyPermissions, validatePermission, authorize };
+export default { parsePermissions, stringifyPermissions, validatePermission, authorize };
