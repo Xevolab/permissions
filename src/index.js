@@ -7,7 +7,7 @@
  * Copyright (c) 2023 Xevolab S.R.L.
  */
 
-const permRegex = /^(\+|-)?(([A-Za-z0-9]+)|(\*))+@[a-zA-Z0-9]+(((:[a-zA-Z0-9-_]*)*(:[a-zA-Z0-9-_]+)$)|$)/;
+const permRegex = /^(\+|-)?(([A-Za-z0-9]+)|(\*))@[a-zA-Z0-9]+(((:[a-zA-Z0-9-_/]*)*(:[a-zA-Z0-9-_/]+)$)|$)/;
 
 /**
  * The parsePermissions function takes the permission blocks, which are
