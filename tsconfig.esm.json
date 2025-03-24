@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"module": "esnext",
+		"outDir": "./dist/esm",
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"moduleResolution": "node",
+		"skipLibCheck": true,
+		"allowJs": true
+	},
+	"include": [
+		"src/"
+	],
+	"exclude": [
+		"node_modules",
+		"**/*.spec.ts"
+	],
+	"types": [
+		"node"
+	]
+}

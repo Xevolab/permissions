@@ -1,34 +1,40 @@
 {
-  "name": "@xevolab/permissions",
-  "version": "1.0.3",
-  "description": "A Javascript permissions parsing and evaluation library",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/built.umd.js",
-  "module": "./dist/built.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/built.es.js",
-      "require": "./dist/built.umd.js"
-    },
-    "./src/index.js": "./src/index.js"
-  },
-  "scripts": {
-    "build": "vite build",
-    "publish:npm": "npm run build && npm publish --access=public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Xevolab/permissions.git"
-  },
-  "author": "Xevolab",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/Xevolab/permissions/issues"
-  },
-  "homepage": "https://github.com/Xevolab/permissions#readme",
-  "devDependencies": {
-    "vite": "^4.2.0"
-  }
+	"name": "@xevolab/permissions",
+	"version": "1.1.0",
+	"description": "A Javascript permissions parsing and evaluation library",
+	"main": "./dist/cjs/index.js",
+	"module": "./dist/esm/index.js",
+	"types": "./dist/types/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/esm/index.js",
+			"require": "./dist/cjs/index.js",
+			"types": "./dist/types/index.d.ts"
+		},
+		"./schemas/*": "./src/schemas/*"
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"lint": "eslint src",
+		"build": "rm -rf ./dist && tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json",
+		"test": "tsc test/test.ts && node test/test.js"
+	},
+	"author": "Xevolab",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Xevolab/permissions.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Xevolab/permissions/issues"
+	},
+	"homepage": "https://github.com/Xevolab/permissions#readme",
+	"devDependencies": {
+		"@types/node": "^20.3.1",
+		"eslint": "^9.23.0",
+		"typescript": "^5.8.2",
+		"@xevolab/eslint-config": "^9.0.7"
+	}
 }
