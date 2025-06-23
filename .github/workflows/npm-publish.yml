@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
-      - run: npm ci
-      - run: npm run build
+      - run: yarn
+      - run: yarn run build
       - uses: actions/upload-artifact@v4
         with:
           name: dist

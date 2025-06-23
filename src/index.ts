@@ -2,7 +2,7 @@
  * Author    : Francesco
  * Created at: 2023-03-16 20:30
  * Edited by : Francesco
- * Edited at : 2025-03-25 00:07
+ * Edited at : 2025-06-23 10:21
  *
  * Copyright (c) 2023 Xevolab S.R.L.
  */
@@ -12,16 +12,16 @@ const permRegex = /^(\+|-)?(([A-Za-z0-9]+)|(\*))@[a-zA-Z0-9]+(((:[a-zA-Z0-9-_/]*
 type AppName = string;
 type ResourceName = string;
 type PermissionName = string;
-type PermissionValue = "+" | "-";
+export type PermissionValue = "+" | "-";
 type InternalPermissionValue = PermissionValue | `++` | "--";
-type PermissionsTree<T = PermissionValue> = Record<AppName,
+export type PermissionsTree<T = PermissionValue> = Record<AppName,
 	Record<
 		ResourceName,
 		Record<PermissionName, T>
 	>
 >;
 
-type PermissionString = `${PermissionValue | ""}${PermissionName}@${AppName}${ResourceName | ""}`;
+type PermissionString = string;
 
 /**
  * The parsePermissions function takes the permission blocks, which are
